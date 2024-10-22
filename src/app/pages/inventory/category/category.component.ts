@@ -10,7 +10,7 @@ import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['../../../app.component.scss']
 })
 export class CategoryComponent {
   @BlockUI() blockUI!: NgBlockUI;

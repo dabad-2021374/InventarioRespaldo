@@ -56,6 +56,10 @@ const routes: Routes = [
         loadChildren: () => import('../../security/change-password/change-password.module').then(m => m.ChangePasswordModule)
     },
     {
+        path: 'movements',
+        loadChildren: () => import('../../inventory/movements/movement.module').then(m => m.MovementsModule)
+    },
+    {
         path: 'notFound',
         loadChildren: () => import('../../general/not-found/not-found.module').then(m => m.NotFoundModule)
     },

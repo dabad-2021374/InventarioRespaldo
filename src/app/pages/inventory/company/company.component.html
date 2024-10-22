@@ -40,11 +40,14 @@
                     <!-- Mensaje de error para nombre -->
                     <div *ngIf="nameField.invalid && nameField.touched" class="error-container">
                         <div class="error-message">
-                            <span *ngIf="nameField.errors?.['required']">{{ 'COMPANY.REQUIRED_NAME' | translate
-                                }}</span>
+                            <span *ngIf="nameField.errors?.['required']">{{ 'COMPANY.REQUIRED_NAME' | translate }}</span>
+                            <span *ngIf="nameField.errors?.['minlength']">{{ 'COMPANY.NAME_MIN_LENGTH' | translate }}</span>
+                            <span *ngIf="nameField.errors?.['maxlength']">{{ 'COMPANY.NAME_MAX_LENGTH' | translate }}</span>
+                            <span *ngIf="nameField.errors?.['pattern']">{{ 'COMPANY.NAME_PATTERN' | translate }}</span>
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="description">{{ 'COMPANY.DESCRIPTION' | translate }} *</label>
                     <input type="text" id="description" class="form-control"
@@ -54,11 +57,13 @@
                     <!-- Mensaje de error para descripción -->
                     <div *ngIf="descriptionField.invalid && descriptionField.touched" class="error-container">
                         <div class="error-message">
-                            <span *ngIf="descriptionField.errors?.['required']">{{ 'COMPANY.REQUIRED_DESCRIPTION' |
-                                translate }}</span>
+                            <span *ngIf="descriptionField.errors?.['required']">{{ 'COMPANY.REQUIRED_DESCRIPTION' | translate }}</span>
+                            <span *ngIf="descriptionField.errors?.['minlength']">{{ 'COMPANY.DESCRIPTION_MIN_LENGTH' | translate }}</span>
+                            <span *ngIf="descriptionField.errors?.['maxlength']">{{ 'COMPANY.DESCRIPTION_MAX_LENGTH' | translate }}</span>
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="adress">{{ 'COMPANY.ADRESS' | translate }} *</label>
                     <input type="text" id="adress" class="form-control" placeholder="{{ 'COMPANY.ADRESS' | translate }}"
@@ -67,11 +72,13 @@
                     <!-- Mensaje de error para dirección -->
                     <div *ngIf="adressField.invalid && adressField.touched" class="error-container">
                         <div class="error-message">
-                            <span *ngIf="adressField.errors?.['required']">{{ 'COMPANY.REQUIRED_ADRESS' | translate
-                                }}</span>
+                            <span *ngIf="adressField.errors?.['required']">{{ 'COMPANY.REQUIRED_ADRESS' | translate }}</span>
+                            <span *ngIf="adressField.errors?.['minlength']">{{ 'COMPANY.ADDRESS_MIN_LENGTH' | translate }}</span>
+                            <span *ngIf="adressField.errors?.['maxlength']">{{ 'COMPANY.ADDRESS_MAX_LENGTH' | translate }}</span>
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="phone">{{ 'COMPANY.PHONE' | translate }} *</label>
                     <input type="text" id="phone" class="form-control" placeholder="{{ 'COMPANY.PHONE' | translate }}"
@@ -80,8 +87,10 @@
                     <!-- Mensaje de error para teléfono -->
                     <div *ngIf="phoneField.invalid && phoneField.touched" class="error-container">
                         <div class="error-message">
-                            <span *ngIf="phoneField.errors?.['required']">{{ 'COMPANY.REQUIRED_PHONE' | translate
-                                }}</span>
+                            <span *ngIf="phoneField.errors?.['required']">{{ 'COMPANY.REQUIRED_PHONE' | translate }}</span>
+                            <span *ngIf="phoneField.errors?.['pattern']">{{ 'COMPANY.PHONE_PATTERN' | translate }}</span>
+                            <span *ngIf="phoneField.errors?.['minlength']">{{ 'COMPANY.PHONE_MIN_LENGTH' | translate }}</span>
+                            <span *ngIf="phoneField.errors?.['maxlength']">{{ 'COMPANY.PHONE_MAX_LENGTH' | translate }}</span>
                         </div>
                     </div>
                 </div>

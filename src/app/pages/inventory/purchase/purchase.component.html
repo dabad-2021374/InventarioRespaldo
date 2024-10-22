@@ -4,22 +4,28 @@
     <div class="container">
         <!-- Sección de la izquierda -->
         <div class="left-section">
+
             <div class="input-group mb-3 search-container">
-                <!--<input type="text" class="form-control" [(ngModel)]="inputSearch"
-                    placeholder="{{ 'PRODUCT.SEARCH_PLACEHOLDER' | translate }}" aria-label="Buscar">-->
-
-                <!-- Boton de clean -->
-                <!--<button class="clear-btn" type="button" *ngIf="inputSearch" (click)="clearSearch()">
-                    <i class="bi bi-x-lg"></i>
-                </button>-->
-
-                <!-- Boton de search -->
-                <!--<button class="btn btn-outline-secondary search-btn" type="button" (click)="searchProducts()">
-                    <i class="bi bi-search"></i>
-                </button>-->
+                <mat-form-field>
+                    <mat-label>{{ 'AUDIT.DATE_RANGE' | translate }}</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="{{ 'AUDIT.START_DATE' | translate }}" [(ngModel)]="startDate">
+                        <input matEndDate placeholder="{{ 'AUDIT.END_DATE' | translate }}" [(ngModel)]="endDate">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            
+                <div class="button-container">
+                    <button mat-icon-button class="btn-outline-secondary" (click)="searchPurchases()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <button mat-icon-button class="btn-outline-secondary" (click)="clearSearchPurchase()">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                </div>
             </div>
 
-            <!-- Lista de la izquierda -->
             <app-list-table [totalSize]="totalProducts" [dataType]="'purchase'" [purchaseService]="purchaseService"
                 [columns]="purchaseColumns" [data]="purchaseData" (itemSelected)="onItemSelected($event)"
                 (pageChange)="onPageChange($event)">
@@ -28,22 +34,27 @@
 
         <!-- Sección de la derecha -->
         <div class="right-section">
-            <h1 class="form-title"> {{ (isEditing ? 'PURCHASE.UPDATE_BUTTON' : 'PURCHASE.SAVE_BUTTON') | translate }}</h1>
+            <h1 class="form-title">{{ (isEditing ? 'PURCHASE.UPDATE_BUTTON' : 'PURCHASE.SAVE_BUTTON') | translate }}
+            </h1>
 
             <div class="form-row">
+                <!-- Cantidad -->
                 <div class="form-group">
-                    <label for="name">{{ 'PURCHASE.QUANTITY' | translate }} *</label>
-                    <input type="number" id="quantity" class="form-control" placeholder="{{ 'PURCHASE.QUANTITY' | translate }}"
-                        [(ngModel)]="quantity" required #quantityField="ngModel">
+                    <label for="quantity">{{ 'PURCHASE.QUANTITY' | translate }} *</label>
+                    <input type="number" id="quantity" class="form-control"
+                        placeholder="{{ 'PURCHASE.QUANTITY' | translate }}" [(ngModel)]="quantity" required
+                        #quantityField="ngModel">
 
-                    <!-- Mensaje de error para nombre -->
+                    <!-- Mensaje de error para cantidad -->
                     <div *ngIf="quantityField.invalid && quantityField.touched" class="error-container">
                         <div class="error-message">
-                            <span *ngIf="quantityField.errors?.['required']">{{ 'PURCHASE.REQUIRED_QUANTITY' | translate }}</span>
+                            <span *ngIf="quantityField.errors?.['required']">{{ 'PURCHASE.REQUIRED_QUANTITY' | translate
+                                }}</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- Selección de bodega -->
                 <div class="form-group">
                     <label for="wineryId">{{ 'PURCHASE.WINERY' | translate }} *</label>
                     <select id="wineryId" class="form-select" [(ngModel)]="selectedWineryId" required>
@@ -55,20 +66,21 @@
                 </div>
             </div>
 
+            <!-- Búsqueda y selección de productos -->
             <div class="input-group mb-3 search-product-container">
                 <input type="text" class="form-control" [(ngModel)]="inputSearch"
                     placeholder="{{ 'PRODUCT.SEARCH_PLACEHOLDER' | translate }}" aria-label="Buscar">
-                <!-- Boton de clean -->
                 <button class="clear-btn" type="button" *ngIf="inputSearch" (click)="clearSearch()">
                     <i class="bi bi-x-lg"></i>
                 </button>
-                <!-- Boton de search -->
                 <button class="btn btn-outline-secondary search-btn" type="button" (click)="searchProducts()">
                     <i class="bi bi-search"></i>
                 </button>
             </div>
+
             <div class="form-group">
-                <label for="products">{{ 'PURCHASE.PURCHASE_PRODUCTS' | translate }} *</label>
+                <label for="products">{{ 'PURCHASE.PRODUCT' | translate }} *</label>
+                <!-- Permitir la selección de múltiples productos -->
                 <mat-selection-list #productsList [(ngModel)]="selectedProducts">
                     <mat-list-option *ngFor="let product of paginatedProducts" [value]="product">
                         <span>{{ getProductDescription(product) }}</span>
@@ -78,7 +90,7 @@
                 </mat-paginator>
             </div>
 
-
+            <!-- Botón para guardar o actualizar -->
             <div class="button-container">
                 <button class="btn-submit" (click)="createOrUpdatePurchase()">
                     {{ (isEditing ? 'PURCHASE.UPDATE_BUTTON' : 'PURCHASE.SAVE_BUTTON') | translate }}

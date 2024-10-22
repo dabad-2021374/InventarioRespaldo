@@ -9,7 +9,7 @@ import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.scss']
+  styleUrls: ['../../../app.component.scss']
 })
 export class CompanyComponent {
   @BlockUI() blockUI!: NgBlockUI;

@@ -2,16 +2,16 @@
     <app-sidebar></app-sidebar>
     <h1 class="title">{{ 'CATEGORY.TITLE' | translate }}</h1>
     <div class="container">
-        <!-- Seccion de la izquierda -->
+        <!-- Sección de la izquierda -->
         <div class="left-section">
             <div class="input-group mb-3 search-container">
                 <input type="text" class="form-control" [(ngModel)]="inputSearch"
                     placeholder="{{ 'CATEGORY.SEARCH_PLACEHOLDER' | translate }}" aria-label="Buscar">
-                <!-- Boton de clean -->
+                <!-- Botón de limpiar -->
                 <button class="clear-btn" type="button" *ngIf="inputSearch" (click)="clearSearch()">
                     <i class="bi bi-x-lg"></i>
                 </button>
-                <!-- Boton de search -->
+                <!-- Botón de buscar -->
                 <button class="btn btn-outline-secondary search-btn" type="button" (click)="searchCategories()">
                     <i class="bi bi-search"></i>
                 </button>
@@ -23,22 +23,21 @@
             </app-list-table>
         </div>
 
-        <!-- Seccion de la derecha -->
+        <!-- Sección de la derecha -->
         <div class="right-section">
-            <h1 class="form-title"> {{ (isEditing ? 'CATEGORY.UPDATE_BUTTON' : 'CATEGORY.SAVE_BUTTON') | translate }}
-            </h1>
+            <h1 class="form-title">{{ (isEditing ? 'CATEGORY.UPDATE_BUTTON' : 'CATEGORY.SAVE_BUTTON') | translate }}</h1>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="name">{{ 'CATEGORY.NAME' | translate }} *</label>
                     <input type="text" id="name" class="form-control" placeholder="{{ 'CATEGORY.NAME' | translate }}"
-                        [(ngModel)]="name" required #nameField="ngModel">
+                        [(ngModel)]="name" required minlength="3" maxlength="50" #nameField="ngModel">
 
                     <!-- Mensaje de error para nombre -->
                     <div *ngIf="nameField.invalid && nameField.touched" class="error-container">
                         <div class="error-message">
-                            <span *ngIf="nameField.errors?.['required']">{{ 'CATEGORY.REQUIRED_NAME' | translate
-                                }}</span>
+                            <span *ngIf="nameField.errors?.['required']">{{ 'CATEGORY.REQUIRED_NAME' | translate }}</span>
+                            <span *ngIf="nameField.errors?.['minlength'] || nameField.errors?.['maxlength']">{{ 'CATEGORY.LENGTH_NAME' | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -47,13 +46,13 @@
                     <label for="description">{{ 'CATEGORY.DESCRIPTION' | translate }} *</label>
                     <input type="text" id="description" class="form-control"
                         placeholder="{{ 'CATEGORY.DESCRIPTION' | translate }}" [(ngModel)]="description" required
-                        #descriptionField="ngModel">
+                        minlength="10" maxlength="50" #descriptionField="ngModel">
 
-                    <!-- Mensaje de error para descripcion -->
+                    <!-- Mensaje de error para descripción -->
                     <div *ngIf="descriptionField.invalid && descriptionField.touched" class="error-container">
                         <div class="error-message">
-                            <span *ngIf="descriptionField.errors?.['required']">{{ 'CATEGORY.REQUIRED_DESCRIPTION' |
-                                translate }}</span>
+                            <span *ngIf="descriptionField.errors?.['required']">{{ 'CATEGORY.REQUIRED_DESCRIPTION' | translate }}</span>
+                            <span *ngIf="descriptionField.errors?.['minlength'] || descriptionField.errors?.['maxlength']">{{ 'CATEGORY.LENGTH_DESCRIPTION' | translate }}</span>
                         </div>
                     </div>
                 </div>

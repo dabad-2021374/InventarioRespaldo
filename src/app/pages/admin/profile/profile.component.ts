@@ -10,7 +10,7 @@ import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['../../../app.component.scss']
 })
 export class ProfileComponent implements OnInit {
   @BlockUI() blockUI!: NgBlockUI;
@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit {
   selectedRoles: string[] = [];
   name = '';
   description = '';
+  status: boolean = false;
   selectedProfileId: string | null = null;
   isEditing = false;
 
@@ -115,7 +116,7 @@ export class ProfileComponent implements OnInit {
       profileId: Number(this.selectedProfileId),
       name: this.name,
       description: this.description,
-      status: true,
+      status: this.status,
       resource: this.selectedRoles
     };
     this.blockUI.start(this.translate.instant('LOADING'));
@@ -188,6 +189,7 @@ export class ProfileComponent implements OnInit {
       this.selectedProfileId = item.profileId;
       this.name = item.name;
       this.description = item.description;
+      this.status = item.status;
       this.selectedRoles = item.resource || [];
       this.isEditing = true;
     } else {
@@ -200,6 +202,7 @@ export class ProfileComponent implements OnInit {
     this.name = '';
     this.description = '';
     this.selectedRoles = [];
+    this.status = false;
     this.selectedProfileId = null;
     this.isEditing = false;
   }

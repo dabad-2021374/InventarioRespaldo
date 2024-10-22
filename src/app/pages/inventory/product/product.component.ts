@@ -14,7 +14,7 @@ import { CategoryService } from '../category/service/category.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['../../../app.component.scss']
 })
 export class ProductComponent {
   @BlockUI() blockUI!: NgBlockUI;
@@ -28,7 +28,6 @@ export class ProductComponent {
   status: boolean = true;
   companyId: number | null = null;
   categoryId: number | null = null;
-
   isEditing: boolean = false;
   selectedProductId: string | null = null;
 

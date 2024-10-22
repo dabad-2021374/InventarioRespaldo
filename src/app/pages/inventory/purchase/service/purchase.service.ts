@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -35,5 +35,22 @@ export class PurchaseService {
 
   deletePurchaseById(id: number): Observable<PurchaseData> {
     return this.http.delete<PurchaseData>(`${this.deleteUrl}/${id}`);
+  }
+
+  search(
+    page: number = 0,
+    size: number = 8,
+    startDate?: Date,
+    endDate?: Date): Observable<PurchaseData> {
+      let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    if (startDate) {
+      params = params.set('startDate', startDate.toISOString().split('T')[0]);
+    }
+    if (endDate) {
+      params = params.set('endDate', endDate.toISOString().split('T')[0]);
+    }
+    return this.http.get<PurchaseData>(this.searchUrl, { params });
   }
 }

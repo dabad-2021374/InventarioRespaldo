@@ -11,7 +11,7 @@ import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['../../../app.component.scss']
 })
 export class UsersComponent implements OnInit {
   @BlockUI() blockUI!: NgBlockUI;

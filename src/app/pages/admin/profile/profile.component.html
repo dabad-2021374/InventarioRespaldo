@@ -27,20 +27,27 @@
 
         <!-- Seccion de la derecha -->
         <div class="right-section">
-            <h1 class="form-title"> {{ (isEditing ? 'PROFILES.UPDATE_BUTTON' : 'PROFILES.SAVE_BUTTON') | translate }}
+            <h1 class="form-title"> {{ (isEditing ? 'PROFILES.UPDATE_BUTTON' : 'PROFILES.SAVE_BUTTON') | translate
+                }}
             </h1>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="name">{{ 'PROFILES.NAME' | translate }} *</label>
                     <input type="text" id="name" class="form-control" placeholder="{{ 'PROFILES.NAME' | translate }}"
-                        [(ngModel)]="name" required #nameField="ngModel">
+                        [(ngModel)]="name" required minlength="3" maxlength="50" pattern="^[a-zA-Z0-9\s]*$"
+                        #nameField="ngModel">
 
                     <!-- Mensaje de error para nombre -->
                     <div *ngIf="nameField.invalid && nameField.touched" class="error-container">
                         <div class="error-message">
                             <span *ngIf="nameField.errors?.['required']">{{ 'PROFILES.REQUIRED_NAME' | translate
                                 }}</span>
+                            <span *ngIf="nameField.errors?.['minlength']">{{ 'PROFILES.MINLENGTH_NAME' | translate
+                                }}</span>
+                            <span *ngIf="nameField.errors?.['pattern']">{{ 'PROFILES.INVALID_CHARACTERS' | translate
+                                }}</span>
+
                         </div>
                     </div>
                 </div>
@@ -49,15 +56,24 @@
                     <label for="description">{{ 'PROFILES.DESCRIPTION' | translate }} *</label>
                     <input type="text" id="description" class="form-control"
                         placeholder="{{ 'PROFILES.DESCRIPTION' | translate }}" [(ngModel)]="description" required
-                        #descriptionField="ngModel">
+                        minlength="10" maxlength="255" #descriptionField="ngModel">
 
-                    <!-- Mensaje de error para descripcion -->
+                    <!-- Mensaje de error para descripción -->
                     <div *ngIf="descriptionField.invalid && descriptionField.touched" class="error-container">
                         <div class="error-message">
                             <span *ngIf="descriptionField.errors?.['required']">{{ 'PROFILES.REQUIRED_DESCRIPTION' |
                                 translate }}</span>
+                            <span *ngIf="descriptionField.errors?.['minlength']">{{ 'PROFILES.MINLENGTH_DESCRIPTION' |
+                                translate }}</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">{{ 'PRODUCT.STATUS' | translate }}</label>
+                    <mat-slide-toggle [(ngModel)]="status" id="status" name="status">
+                        {{ status ? ('PRODUCT.ACTIVE' | translate) : ('PRODUCT.INACTIVE' | translate) }}
+                    </mat-slide-toggle>
                 </div>
             </div>
 
@@ -75,7 +91,8 @@
             <p>{{ 'PROFILES.SELECTED_ROLES' | translate }}: {{ rolesList.selectedOptions.selected.length }}</p>
 
             <div class="button-container">
-                <button class="btn-submit" (click)="createOrUpdateProfile()">
+                <button class="btn-submit" (click)="createOrUpdateProfile()"
+                    [disabled]="nameField.invalid || descriptionField.invalid">
                     {{ (isEditing ? 'PROFILES.UPDATE_BUTTON' : 'PROFILES.SAVE_BUTTON') | translate }}
                 </button>
             </div>

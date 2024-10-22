@@ -12,7 +12,7 @@ import { UserData, User } from '../../admin/users/interface/users.module';
 @Component({
   selector: 'app-winery',
   templateUrl: './winery.component.html',
-  styleUrls: ['./winery.component.scss']
+  styleUrls: ['../../../app.component.scss']
 })
 export class WineryComponent {
   @BlockUI() blockUI!: NgBlockUI;

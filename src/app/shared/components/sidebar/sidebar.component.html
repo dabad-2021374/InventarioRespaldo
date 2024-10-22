@@ -62,7 +62,8 @@
       </a>
     </li>
     <li>
-      <a class="btn btn-link" matTooltip="{{ 'SIDEBAR.MOVEMENTS_DESCRIPTION' | translate }}">
+      <a class="btn btn-link" [routerLink]="['/home/movements']"
+        matTooltip="{{ 'SIDEBAR.MOVEMENTS_DESCRIPTION' | translate }}">
         <mat-icon>swap_vert</mat-icon>
         <span>{{ 'SIDEBAR.MOVEMENTS' | translate }}</span>
       </a>

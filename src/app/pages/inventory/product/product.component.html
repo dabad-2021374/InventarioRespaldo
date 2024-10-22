@@ -35,13 +35,14 @@
                 <div class="form-group">
                     <label for="name">{{ 'PRODUCT.NAME' | translate }} *</label>
                     <input type="text" id="name" class="form-control" placeholder="{{ 'PRODUCT.NAME' | translate }}"
-                        [(ngModel)]="name" required #nameField="ngModel">
+                        [(ngModel)]="name" required #nameField="ngModel" pattern="^(?=.{3,60}$)[a-zA-Z0-9\s]*$">
 
                     <!-- Mensaje de error para nombre -->
                     <div *ngIf="nameField.invalid && nameField.touched" class="error-container">
                         <div class="error-message">
                             <span *ngIf="nameField.errors?.['required']">{{ 'PRODUCT.REQUIRED_NAME' | translate
                                 }}</span>
+                            <span *ngIf="nameField.errors?.['pattern']">{{ 'PRODUCT.INVALID_NAME' | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -50,28 +51,31 @@
                     <label for="deliveryTime">{{ 'PRODUCT.DELIVERY_TIME' | translate }} *</label>
                     <input type="number" id="deliveryTime" class="form-control"
                         placeholder="{{ 'PRODUCT.DELIVERY_TIME' | translate }}" [(ngModel)]="deliveryTime" required
-                        #deliveryTimeField="ngModel">
+                        #deliveryTimeField="ngModel" min="1">
 
                     <!-- Mensaje de error para tiempo de entrega -->
                     <div *ngIf="deliveryTimeField.invalid && deliveryTimeField.touched" class="error-container">
                         <div class="error-message">
                             <span *ngIf="deliveryTimeField.errors?.['required']">{{ 'PRODUCT.REQUIRED_DELIVERY_TIME' |
                                 translate }}</span>
+                            <span *ngIf="deliveryTimeField.errors?.['min']">{{ 'PRODUCT.MIN_DELIVERY_TIME' | translate
+                                }}</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="barCode">{{ 'PRODUCT.BARCODE' | translate }} *</label>
-                    <input type="text" id="barCode" class="form-control"
+                    <input type="number" id="barCode" class="form-control"
                         placeholder="{{ 'PRODUCT.BARCODE' | translate }}" [(ngModel)]="barCode" required
-                        #barCodeField="ngModel">
-
+                        #barCodeField="ngModel" min="10000000" max="9999999999999">
+                
                     <!-- Mensaje de error para código de barras -->
                     <div *ngIf="barCodeField.invalid && barCodeField.touched" class="error-container">
                         <div class="error-message">
-                            <span *ngIf="barCodeField.errors?.['required']">{{ 'PRODUCT.REQUIRED_BARCODE' | translate
-                                }}</span>
+                            <span *ngIf="barCodeField.errors?.['required']">{{ 'PRODUCT.REQUIRED_BARCODE' | translate }}</span>
+                            <span *ngIf="barCodeField.errors?.['min']">{{ 'PRODUCT.INVALID_BARCODE' | translate }}</span>
+                            <span *ngIf="barCodeField.errors?.['max']">{{ 'PRODUCT.INVALID_BARCODE' | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -80,12 +84,14 @@
                     <label for="description">{{ 'PRODUCT.DESCRIPTION' | translate }} *</label>
                     <input type="text" id="description" class="form-control"
                         placeholder="{{ 'PRODUCT.DESCRIPTION' | translate }}" [(ngModel)]="description" required
-                        #descriptionField="ngModel">
+                        #descriptionField="ngModel" minlength="10" maxlength="255"> 
 
                     <!-- Mensaje de error para descripción -->
                     <div *ngIf="descriptionField.invalid && descriptionField.touched" class="error-container">
                         <div class="error-message">
                             <span *ngIf="descriptionField.errors?.['required']">{{ 'PRODUCT.REQUIRED_DESCRIPTION' |
+                                translate }}</span>
+                            <span *ngIf="descriptionField.errors?.['minlength']">{{ 'PRODUCT.INVALID_DESCRIPTION' |
                                 translate }}</span>
                         </div>
                     </div>
@@ -95,7 +101,7 @@
                     <label for="availableQuantity">{{ 'PRODUCT.AVAILABLE_QUANTITY' | translate }} *</label>
                     <input type="number" id="availableQuantity" class="form-control"
                         placeholder="{{ 'PRODUCT.AVAILABLE_QUANTITY' | translate }}" [(ngModel)]="availableQuantity"
-                        required #availableQuantityField="ngModel">
+                        required #availableQuantityField="ngModel" min="0">
 
                     <!-- Mensaje de error para cantidad disponible -->
                     <div *ngIf="availableQuantityField.invalid && availableQuantityField.touched"
@@ -103,6 +109,8 @@
                         <div class="error-message">
                             <span *ngIf="availableQuantityField.errors?.['required']">{{
                                 'PRODUCT.REQUIRED_AVAILABLE_QUANTITY' | translate }}</span>
+                            <span *ngIf="availableQuantityField.errors?.['min']">{{ 'PRODUCT.MIN_AVAILABLE_QUANTITY' |
+                                translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -110,7 +118,7 @@
                 <div class="form-group">
                     <label for="price">{{ 'PRODUCT.PRICE' | translate }} *</label>
                     <input type="number" id="price" class="form-control" placeholder="{{ 'PRODUCT.PRICE' | translate }}"
-                        [(ngModel)]="price" required #priceField="ngModel">
+                        [(ngModel)]="price" required #priceField="ngModel" min="0">
 
                     <!-- Mensaje de error para precio -->
                     <div *ngIf="priceField.invalid && priceField.touched" class="error-container">
