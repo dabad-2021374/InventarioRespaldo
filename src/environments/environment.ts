@@ -60,5 +60,10 @@ export const environment = {
         deletePurchase: '/api/purchase/delete',
         updatePurchase: '/api/purchase/update',
         searchPurchase: '/api/purchase/search'
+    },
+    movementUrl: {
+        movementList: '/api/inventory-movements/list',
+        movementHistory: '/api/inventory-movements/history',
+        confirmEntry: '/api/inventory-movements/entrada'
     }
 };
